@@ -8,6 +8,7 @@ exports.signin = (req, res) => {
     const email = req.body.email;
     const password = req.body.password; 
 
+    
     // Compare passwords
     bcrypt.hash(password, 12 , (err, data) => {
 
@@ -24,8 +25,8 @@ exports.signin = (req, res) => {
         }
 
         // check details in user table
-        user.find({ email: email, password: data}).then((result) => {
-           console.log(data);
+        user.findOne({ email: email, password: data}).then((result) => {
+
             // successful login
             req.session.authenticated = {
                 status: true,
