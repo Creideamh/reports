@@ -72,15 +72,15 @@
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
-  <% if (message) { %>
-    <div class="alert  alert-dismissable fade show alert-<%= message.type  %>" role="alert">
-     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-     <strong><%= message.message %> </strong>
-    </div>
-   <% } %>
+
   <form action="/signin" method="post">
-    <img class="mb-4" src="/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <img class="mb-4" src="/imgs/r.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please Sign-in</h1>
+    <% if (message) { %>
+      <div class="alert  alert-dismissable fade show alert-<%= message.type  %>" role="alert">
+       <strong><%= message.message %> </strong>
+      </div>
+     <% } %>
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" name="email">
       <label for="floatingInput">email</label>

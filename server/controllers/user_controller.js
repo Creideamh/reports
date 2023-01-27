@@ -10,42 +10,48 @@ exports.signin = (req, res) => {
 
     
     // Compare passwords
-    bcrypt.hash(password, 12 , (err, data) => {
+    user.findOne({email: email}).then((result) => {
+        
+        // Compare hashed passwords
+        bcrypt.compare(password, result.password).then((status) => {
 
-        // when hash fails
-        if (err) {
+            // hashed passwords do not match
+             if(status === false){
+                req.session.message = {
+                    type: 'danger',
+                    message: 'Invalid credentials'
+                }
+                res.redirect('/');
+             }
 
-            req.session.authenticated = {
-                status: false,
-                message: `Invalid login credentials   ${err.message}`,
-                user: result
-            }
-            res.redirect('login');
-
-        }
-
-        // check details in user table
-        user.findOne({ email: email, password: data}).then((result) => {
-
-            // successful login
-            req.session.authenticated = {
-                status: true,
-                user: result
+            // When correct details are supplied by user
+            req.session.message = {
+                type: 'danger',
+                message: 'Invalid credentials',
+                user: result,
             }
             res.redirect('dashboard');
 
+        // hashed passwords do not match
         }).catch((err) => {
-            
-            // failed login
-            req.session.authenticated = {
-                status: false,
-                message: `Invalid login credentials   ${err.message}`,
-            }
-            res.redirect('login');
-            
+
+                req.session.message = {
+                    type: 'danger',
+                    message: 'Invalid credentials'
+                }
+               return  res.redirect('/');
+
         });
 
-    })
+    // When supplies wrong email address
+    }).catch((err) => {
+
+            req.session.message = {
+                type: 'danger',
+                message: `System failed to find User`
+            }
+            res.redirect('/');
+    });
 
 
 }
