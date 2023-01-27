@@ -1,0 +1,44 @@
+<!-- include header -->
+<%- include('./../incs/_header.ejs') %>
+<!-- end header -->
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12">
+          </div>
+          <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="/users">Users</a></li>
+            </ol>
+          </nav>
+      </div>
+
+      <div class="card">
+          <div class="card-header">
+            Delete User
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <p>
+                    Sure, you want to drop this item from the database
+                </p>
+               </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <form action="user-delete" method="post">
+                <input type="hidden" name="user_id" value="<%= user._id %>">
+                <button type="submit" class="btn btn-danger">Yes</button>                   
+            </form>
+          </div>
+      </div>
+
+    </div>
+
+
+<!-- include footer -->
+    <%- include('./../incs/_footer.ejs') %> 
+<!-- end footer -->

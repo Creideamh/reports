@@ -1,0 +1,55 @@
+<!-- include header -->
+<%- include('./../incs/_header.ejs') %>
+<!-- end header -->
+
+    <div class="container-fluid">
+
+      <div class="row">
+          <div class="col-12 mt-5 mb-5">
+            <a href="" class="btn btn-primary">Edit Incident</a>
+          </div>
+          <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Library</li>
+            </ol>
+          </nav>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-4">
+            <form action="" method="post">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Caller</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Incident</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="status">Status</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected></option>
+                        <option value="1">Resolved</option>
+                        <option value="2">Pending</option>
+                        <option value="3">Closed Complete</option>
+                        <option value="4">Closed Incomplete</option>
+                        <option value="5">Cancelled</option>
+                      </select>
+                </div>
+                <div class="mb-3">
+                    <label for="incident_date">Date</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1">
+                </div>
+            
+                <button type="submit" class="btn btn-primary float-end">Submit</button>
+            </form>        </div>
+    </div>
+    </div>
+
+
+<!-- include footer -->
+    <%- include('./../incs/_footer.ejs') %> 
+<!-- end footer -->
