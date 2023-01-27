@@ -43,9 +43,22 @@ app.use((req,res, next)=>{
 })
 
 
+
+
 // set view engine
 app.set('view engine', "ejs");
 // app.set("views", path.resolve(__dirname, "/views/"));
+
+app.use(function(req,res,next){
+    var _send = res.send;
+   var sent = false;
+   res.send = function(data){
+       if(sent) return;
+       _send.bind(res)(data);
+       sent = true;
+   };
+   next();
+});
 
 // load assets 
 app.use('/css', express.static(path.resolve(__dirname, 'public/css')))
