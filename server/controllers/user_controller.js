@@ -3,7 +3,7 @@ const user_model = require('./../model/user');
 
 const bcrypt = require('bcryptjs');
 
-exports.signin = (req, res) => {
+exports.signin = (req, res, next) => {
 
     const email = req.body.email;
     const password = req.body.password; 
@@ -25,9 +25,23 @@ exports.signin = (req, res) => {
              }
 
             // When correct details are supplied by user
-            req.session.user = result;
-            res.redirect('/index')
-        // hashed passwords do not match
+             req.session.regenerate( err => {
+
+                // store user information in session
+                req.session.user = result;
+                
+                /**
+                 * save the session before redirection to ensure page
+                 * load does not happen before session is saved
+                 */
+                req.session.save( (err) => {
+                    if (err) return next(err);
+                    res.redirect('/dashboard')
+                });
+
+             });
+
+                    // hashed passwords do not match
         }).catch((err) => {
 
                 req.session.message = {
@@ -46,7 +60,6 @@ exports.signin = (req, res) => {
             }
             res.redirect('/');
     });
-
 
 }
 
