@@ -25,10 +25,8 @@ exports.signin = (req, res) => {
              }
 
             // When correct details are supplied by user
-            req.session.message = {
-                     user: result,
-            }
-            res.redirect('dashboard')
+            req.session.user = result;
+            res.redirect('/index')
         // hashed passwords do not match
         }).catch((err) => {
 
@@ -36,8 +34,7 @@ exports.signin = (req, res) => {
                     type: 'danger',
                     message: 'Invalid credentials'
                 }
-               return  res.redirect('/');
-
+                res.redirect('/');
         });
 
     // When supplies wrong email address
