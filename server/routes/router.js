@@ -31,5 +31,7 @@ routes.post('/update-user', users.update);
 routes.post('/reset-complete', users.reset);
 routes.post('/signin', users.signin)
 
+// Incident Post Requests
+route.post('/add-incident',)
 
 module.exports = routes;

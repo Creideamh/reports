@@ -36,7 +36,7 @@ exports.signin = (req, res, next) => {
                  */
                 req.session.save( (err) => {
                     if (err) return next(err);
-                    res.redirect('/dashboard')
+                    res.redirect('/users')
                 });
 
              });
