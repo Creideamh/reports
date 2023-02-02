@@ -30,9 +30,19 @@ exports.HomeRoutes = (req, res) => {
 }
 
 exports.allIncidents = (req, res) => {
+    let results;
+    let multiplex = incident.aggregate([
+        {
+            $lookup: {
+                from: user,
+                localField: incident.user_id,
+                foreignField:user._id,
+                as: results
+            }
+        }]
+    );
 
-
-
+    console.log(multiplex);
     incident.find().then((result) => {
         res.render('incidents/index', {
             incidents: result,
