@@ -6,6 +6,7 @@ const generator = require('generate-password');
 const email = require('./../utils/email');
 const employee = require('../model/employees');
 const incident = require('../model/incidents');
+const { MongoClient } = require('mongodb');
 
 exports.login = (req, res) => {
     res.render('login', {
@@ -30,26 +31,32 @@ exports.HomeRoutes = (req, res) => {
 }
 
 exports.allIncidents = (req, res) => {
-    let results;
-    let multiplex = incident.aggregate([
-        {
-            $lookup: {
-                from: user,
-                localField: incident.user_id,
-                foreignField:user._id,
-                as: results
-            }
-        }]
-    );
 
-    console.log(multiplex);
-    incident.find().then((result) => {
-        res.render('incidents/index', {
-            incidents: result,
-            title: 'All Incidents'
-        });
-    }).catch((err) => {
-        
+    var url = process.env.MONGO_URI_BACKUP;
+
+    const client = new MongoClient(url);
+    var db = client.db('reports');
+    var collection = db.collection('users');
+
+    var options = {
+        allDiskUse: false
+    };
+
+    var pipeline = [
+        {
+            "$lookup": {
+                "from": "incidents",
+                "localField": "_id",
+                "foreignField": "user_id",
+                "as": "incidents_users"
+            }
+        }
+    ];
+
+    var cursor = collection.aggregate(pipeline, options);
+    res.render('incidents/index', {
+        incidents: Object.values(cursor),
+        title: 'All Incidents'
     });
 
 };

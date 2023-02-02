@@ -7,7 +7,7 @@ const mongodbStore = require('connect-mongodb-session')(session);
 const dotenv  = require('dotenv');
 const path = require("path");
 const routes = require('./server/routes/router.js');
-const connectDB = require('./server/database/mysql-con.js');
+const connectDB = require('./server/database/connection.js');
 
 
 const app = express(); // app create

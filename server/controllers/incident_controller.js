@@ -1,6 +1,7 @@
 const incident = require('./../model/incidents');
 
 
+
 // add incident 
 exports.create = (req, res) => {
 
