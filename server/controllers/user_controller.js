@@ -25,21 +25,12 @@ exports.signin = (req, res, next) => {
              }
 
             // When correct details are supplied by user
-             req.session.regenerate( err => {
-
-                // store user information in session
-                req.session.user = result;
-                
-                /**
-                 * save the session before redirection to ensure page
-                 * load does not happen before session is saved
-                 */
-                req.session.save( (err) => {
-                    if (err) return next(err);
-                    res.redirect('/users')
-                });
-
+             req.session.user = result;
+             return req.session.save( err => {
+                console.log(req.session.user);
+                return res.redirect('/users');
              });
+
 
                     // hashed passwords do not match
         }).catch((err) => {
@@ -214,7 +205,7 @@ exports.reset = (req, res) => {
                         type: 'danger',
                         message: `Unable to update user with ID ${id}`
                     }
-                    res.redirect('reset-password')
+                    res.redirect('reset-password');
                 }
 
                 res.redirect('/');
@@ -229,9 +220,6 @@ exports.reset = (req, res) => {
                 res.redirect('reset-password');
 
             });
-
-
-
 
         })
 

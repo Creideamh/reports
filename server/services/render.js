@@ -4,6 +4,8 @@ const country = require('./../model/countries');
 const bcrypt = require('bcryptjs');
 const generator = require('generate-password');
 const email = require('./../utils/email');
+const employee = require('../model/employees');
+const incident = require('../model/incidents');
 
 exports.login = (req, res) => {
     res.render('login', {
@@ -12,12 +14,14 @@ exports.login = (req, res) => {
 }
 
 exports.signout = (req, res) => {
+
     req.session.destroy((err) => {
         res.render('login', {
             title: 'Report System' 
-        })
-    })
-}
+        });
+    });
+
+};
 
 exports.HomeRoutes = (req, res) => {
     res.render('index', {
@@ -26,15 +30,39 @@ exports.HomeRoutes = (req, res) => {
 }
 
 exports.allIncidents = (req, res) => {
-    res.render('incidents/index', {
-        title: 'All Incidents'
+
+
+
+    incident.find().then((result) => {
+        res.render('incidents/index', {
+            incidents: result,
+            title: 'All Incidents'
+        });
+    }).catch((err) => {
+        
     });
+
 };
 
 exports.addIncident = (req, res) => {
-    res.render('incidents/add', {
-        title: 'Create Incident'
+
+    employee.find().then((data) => {
+
+        res.render('incidents/add', {
+            title: 'Create Incident',
+            employees: data,
+        });
+
+    }).catch((err) => {
+        
+        res.render('/incidents/add', {
+            title: 'Create Incident',
+            employees: `${err}`
+        });
+
     });
+
+
 };
 
 exports.editIncident = (req, res) => {

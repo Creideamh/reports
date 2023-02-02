@@ -9,7 +9,12 @@
               <a href="/incidents/add" class="btn btn-primary"><span class="icon-ticket"></span> Create Incident</a>
           </div>          
       </div>
-
+      <% if (message) { %>
+        <div class="alert  alert-dismissable fade show alert-<%= message.type  %>" role="alert">
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         <strong><%= message.message %> </strong>
+        </div>
+       <% } %>
       <div class="card text-bg-light">
         <h5 class="card-header">Lists</h5>
 
@@ -36,6 +41,7 @@
                 </tr>
               </thead>
               <tbody>
+
                 <tr scope="row">
                   <th scope="row">
                     <label class="control control--checkbox">
