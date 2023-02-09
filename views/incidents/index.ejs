@@ -1,0 +1,61 @@
+<!-- include header -->
+    <%- include('./../incs/_header.ejs') %>
+<!-- end header -->
+
+    <div class="container-fluid">
+
+      <div class="row">
+          <div class="col-12 mt-5 mb-5">
+              <a href="/incidents/add" class="btn btn-primary"><span class="icon-ticket"></span> Create Incident</a>
+          </div>          
+      </div>
+      <% if (message) { %>
+        <div class="alert  alert-dismissable fade show alert-<%= message.type  %>" role="alert">
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         <strong><%= message.message %> </strong>
+        </div>
+       <% } %>
+      <div class="card text-bg-light">
+        <h5 class="card-header">Lists</h5>
+
+        <div class="card-body">
+          <div class="table-responsive custom-table-responsive">
+            <table class="table custom-table">
+              <thead>
+                <tr> 
+
+                  <th scope="col">No#</th>
+                  <th scope="col">Technician</th>
+                  <th scope="col">Incident</th>
+                  <th scope="col">Caller</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+  
+                </tr>
+              </thead>
+              <tbody>
+                <% 
+                    console.log(incidents);
+                  
+                  %> 
+
+ 
+
+
+
+  
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+<!-- include footer -->
+    <%- include('./../incs/_footer.ejs') %> 
+<!-- end footer -->
